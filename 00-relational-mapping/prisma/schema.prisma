@@ -11,15 +11,14 @@ datasource db {
 }
 
 model User {
-  username String @id // @default(cuid())
+  username String @id @default(cuid())
   password String
-  balance Int
-  name String
-  surname String
+  balance Int @default(1000000)
+  name String?
 }
 
 model Book {
-  isbn Int @id
+  isbn String @id
   title String?
   author String?
   publisher String?

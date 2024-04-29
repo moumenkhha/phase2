@@ -1,14 +1,10 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import * as users from "@/repository/users";
 export default async function Home() {
-  const users = await prisma.user.findMany();
-  return <main>
-    {users.map(user => (
-      <div key={user.username} className="flex gap-x-3">
-        <span className="font-medium">{user.name}</span>
-        <span className="font-mono">{user.surname}</span>
-      </div>
-    ))}
-  </main>
-
+  const result = await users.get();
+  return result.map(user =>
+    <div key={user.username}>
+      <h1>Name: {user.name} {user.surname}</h1>
+      <p>Balance: {user.balance}</p>
+    </div>
+  );
 }
