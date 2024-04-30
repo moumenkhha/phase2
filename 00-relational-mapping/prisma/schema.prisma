@@ -16,21 +16,17 @@ model Buyer {
   balance  Int        @default(1000000)
   name     String?
   location String?
-  Purchase Purchase[]
+  purchase Purchase[]
 }
 
-model Book {
-  isbn         String     @id
-  title        String
-  bookSeller   Seller     @relation(fields: [seller], references: [username])
-  seller       String
-  author       String?
-  publisher    String?
-  publish_year Int?
-  genre        String?
-  price        Int
-  quantity     Int
-  Purchase     Purchase[]
+model Item {
+  id         String     @id @default(cuid())
+  name       String?
+  itemSeller Seller     @relation(fields: [seller], references: [username])
+  seller     String
+  price      Int?
+  quantity   Int?
+  purchase   Purchase[]
 }
 
 model Seller {
@@ -38,14 +34,14 @@ model Seller {
   password String
   name     String?
 
-  Purchase Purchase[]
-  Book     Book[]
+  purchase Purchase[]
+  item     Item[]
 }
 
 model Purchase {
   id            String @id @default(cuid())
-  purchasedBook Book   @relation(fields: [isbn], references: [isbn])
-  isbn          String
+  purchasedItem Item   @relation(fields: [itemId], references: [id])
+  itemId        String
 
   purchaseSeller Seller @relation(fields: [seller], references: [username])
   seller         String
@@ -53,5 +49,5 @@ model Purchase {
   purchaseBuyer Buyer  @relation(fields: [buyer], references: [username])
   buyer         String
 
-  year String?
+  year Int?
 }
