@@ -15,7 +15,7 @@ model Buyer {
   password String
   balance  Int        @default(1000000)
   name     String?
-  location String
+  location String?
   Purchase Purchase[]
 }
 
@@ -53,5 +53,5 @@ model Purchase {
   purchaseBuyer Buyer  @relation(fields: [buyer], references: [username])
   buyer         String
 
-  year String
+  year String?
 }
