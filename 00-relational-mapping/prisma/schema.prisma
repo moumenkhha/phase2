@@ -10,20 +10,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  username String @id @default(cuid())
+model Buyer {
+  username String     @id @default(cuid())
   password String
-  balance Int @default(1000000)
-  name String?
+  balance  Int        @default(1000000)
+  name     String?
+  location String
+  Purchase Purchase[]
 }
 
 model Book {
-  isbn String @id
-  title String?
-  author String?
-  publisher String?
+  isbn         String     @id
+  title        String
+  bookSeller   Seller     @relation(fields: [seller], references: [username])
+  seller       String
+  author       String?
+  publisher    String?
   publish_year Int?
-  genre String?
-  price Int?
-  quantity Int?
+  genre        String?
+  price        Int
+  quantity     Int
+  Purchase     Purchase[]
+}
+
+model Seller {
+  username String  @id
+  password String
+  name     String?
+
+  Purchase Purchase[]
+  Book     Book[]
+}
+
+model Purchase {
+  id            String @id @default(cuid())
+  purchasedBook Book   @relation(fields: [isbn], references: [isbn])
+  isbn          String
+
+  purchaseSeller Seller @relation(fields: [seller], references: [username])
+  seller         String
+
+  purchaseBuyer Buyer  @relation(fields: [buyer], references: [username])
+  buyer         String
+
+  year String
 }
