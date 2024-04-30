@@ -11,12 +11,14 @@ CREATE TABLE "Buyer" (
 CREATE TABLE "Book" (
     "isbn" TEXT NOT NULL PRIMARY KEY,
     "title" TEXT NOT NULL,
+    "seller" TEXT NOT NULL,
     "author" TEXT,
     "publisher" TEXT,
     "publish_year" INTEGER,
     "genre" TEXT,
     "price" INTEGER NOT NULL,
-    "quantity" INTEGER NOT NULL
+    "quantity" INTEGER NOT NULL,
+    CONSTRAINT "Book_seller_fkey" FOREIGN KEY ("seller") REFERENCES "Seller" ("username") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -29,9 +31,11 @@ CREATE TABLE "Seller" (
 -- CreateTable
 CREATE TABLE "Purchase" (
     "id" TEXT NOT NULL PRIMARY KEY,
+    "isbn" TEXT NOT NULL,
     "seller" TEXT NOT NULL,
     "buyer" TEXT NOT NULL,
     "year" TEXT NOT NULL,
+    CONSTRAINT "Purchase_isbn_fkey" FOREIGN KEY ("isbn") REFERENCES "Book" ("isbn") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Purchase_seller_fkey" FOREIGN KEY ("seller") REFERENCES "Seller" ("username") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Purchase_buyer_fkey" FOREIGN KEY ("buyer") REFERENCES "Buyer" ("username") ON DELETE RESTRICT ON UPDATE CASCADE
 );
