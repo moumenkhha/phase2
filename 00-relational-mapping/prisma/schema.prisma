@@ -15,7 +15,7 @@ model Buyer {
   password String
   balance  Int        @default(1000000)
   name     String
-  location String
+  location String?
   purchase Purchase[]
 }
 
@@ -24,13 +24,13 @@ model Item {
   name       String
   itemSeller Seller     @relation(fields: [seller], references: [username], onDelete: Cascade)
   seller     String
-  price      Int
-  quantity   Int
+  price      Int        @default(10)
+  quantity   Int        @default(10)
   purchase   Purchase[]
 }
 
 model Seller {
-  username String  @id
+  username String @id
   password String
   name     String
 
@@ -39,7 +39,7 @@ model Seller {
 }
 
 model Purchase {
-  purchaseId            String @id @default(cuid())
+  purchaseId    String @id @default(cuid())
   purchasedItem Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId        String
 

@@ -1,30 +1,40 @@
 import prisma from '@/repository/prisma';
 
-export async function get(id) {
-    if (!id) {
+export async function get(username) {   // Done
+    if (!username) {
         return await prisma.buyer.findMany({
             include: {
-                purchases: true
+                purchase: true
             }
         });
     }
     return await prisma.buyer.findUnique({
         where: {
-            id,
+            username,
         }
-        // include : {purchases: true}  // Return
     });
 }
 
-export async function add() { }
+export async function add(name, password) { // Done
+    return await prisma.buyer.create({
+        data: {
+            name,
+            password,
+        }
+    });
+}
 
-export async function remove(id) {
-    const result = await prisma.buyer.delete({
+export async function remove(username) {    // Done
+    if (await prisma.buyer.findUnique({
         where: {
-            id,
+            username,
         }
-    });
-    await disconn
+    }))
+        return await prisma.buyer.delete({
+            where: {
+                username,
+            }
+        });
 }
 
-export async function update(id) { }
+export async function update(username) { }

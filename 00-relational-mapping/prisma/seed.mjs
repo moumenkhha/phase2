@@ -42,7 +42,7 @@ const seed = async () => {
             }
         });
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 1; i++) {
             const count = await prisma.item.count();    // itemCount = buyers = seller
             const randomIndex = Math.floor(Math.random() * count); 
 
