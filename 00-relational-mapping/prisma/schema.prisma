@@ -14,40 +14,40 @@ model Buyer {
   username String     @id @default(cuid())
   password String
   balance  Int        @default(1000000)
-  name     String?
-  location String?
+  name     String
+  location String
   purchase Purchase[]
 }
 
 model Item {
   id         String     @id @default(cuid())
-  name       String?
-  itemSeller Seller     @relation(fields: [seller], references: [username])
+  name       String
+  itemSeller Seller     @relation(fields: [seller], references: [username], onDelete: Cascade)
   seller     String
-  price      Int?
-  quantity   Int?
+  price      Int
+  quantity   Int
   purchase   Purchase[]
 }
 
 model Seller {
   username String  @id
   password String
-  name     String?
+  name     String
 
   purchase Purchase[]
   item     Item[]
 }
 
 model Purchase {
-  id            String @id @default(cuid())
-  purchasedItem Item   @relation(fields: [itemId], references: [id])
+  purchaseId            String @id @default(cuid())
+  purchasedItem Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId        String
 
-  purchaseSeller Seller @relation(fields: [seller], references: [username])
+  purchaseSeller Seller @relation(fields: [seller], references: [username], onDelete: Cascade)
   seller         String
 
-  purchaseBuyer Buyer  @relation(fields: [buyer], references: [username])
+  purchaseBuyer Buyer  @relation(fields: [buyer], references: [username], onDelete: Cascade)
   buyer         String
 
-  year Int?
+  year Int @default(2024)
 }
