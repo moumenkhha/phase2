@@ -3,7 +3,7 @@ import "./globals.css";
 
 
 export const metadata = {
-  title: "Relational Mapping",
+  title: "Project Phase 2",
 };
 
 export default function RootLayout({ children }) {
