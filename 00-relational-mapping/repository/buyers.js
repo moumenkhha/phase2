@@ -15,13 +15,9 @@ export async function get(username) {   // Done
     });
 }
 
-export async function add(name, password, location) { // Done
+export async function add(props) { // Done
     return await prisma.buyer.create({
-        data: {
-            name,
-            password,
-            location
-        }
+        data: props
     });
 }
 

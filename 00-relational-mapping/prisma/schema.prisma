@@ -12,8 +12,8 @@ datasource db {
 
 model Buyer {
   username String     @id @default(cuid())
-  password String     
-  name     String?
+  password String     @default("password")
+  name     String     @default("AbdAllah")
   balance  Int        @default(1000000)
   location String     @default("Doha")
   purchase Purchase[]
