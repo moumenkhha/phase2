@@ -40,19 +40,11 @@ export async function remove(username) {    // Done
         });
 }
 
-export async function update(username, password, name) {    // Done
-        return await prisma.seller.upsert({
-            where: {
-                username
-            },
-            update: {
-                name,
-                password,
-            },
-            create: {
-                username,
-                password,
-                name,
-            },
-        })
+export async function update(username, props) {
+    return await prisma.seller.update({
+        where: {
+            username
+        },
+        data: props
+    })
 }

@@ -15,11 +15,12 @@ export async function get(username) {   // Done
     });
 }
 
-export async function add(name, password) { // Done
+export async function add(name, password, location) { // Done
     return await prisma.buyer.create({
         data: {
             name,
             password,
+            location
         }
     });
 }
@@ -37,23 +38,11 @@ export async function remove(username) {    // Done
         });
 }
 
-export async function update(username, password, name, balance,  location) {    // Done
-    return await prisma.buyer.upsert({
+export async function update(username, props) {    // Done
+    return await prisma.buyer.update({
         where: {
             username
         },
-        update: {
-            password,
-            name,
-            balance,
-            location
-        },
-        create: {
-            username,
-            password,
-            name,
-            balance,
-            location
-        },
+        data: props
     })
 }

@@ -1,7 +1,7 @@
-import * as buyers from "@/repository/buyer";
-import * as items from "@/repository/item";
-import * as purchases from "@/repository/puchase";
-import * as sellers from "@/repository/seller";
+import * as buyers from "@/repository/buyers";
+import * as items from "@/repository/items";
+import * as purchases from "@/repository/purchases";
+import * as sellers from "@/repository/sellers";
 export default async function Home() {
 
   const result = await buyers.get();
