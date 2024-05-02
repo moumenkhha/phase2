@@ -37,4 +37,23 @@ export async function remove(username) {    // Done
         });
 }
 
-export async function update(username) { }
+export async function update(username, password, name, balance,  location) {    // Done
+    return await prisma.buyer.upsert({
+        where: {
+            username
+        },
+        update: {
+            password,
+            name,
+            balance,
+            location
+        },
+        create: {
+            username,
+            password,
+            name,
+            balance,
+            location
+        },
+    })
+}

@@ -12,17 +12,20 @@ export async function get(purchaseId) { // Done
     });
 }
 
-export async function add(itemId, seller, buyer) {
-    return await prisma.purchase.create({
-        data: {
-            itemId,
-            seller,
-            buyer
-        }
-    });
+export async function add(itemId, seller, buyer) {  // Done
+    try {
+        return await prisma.purchase.create({
+            data: {
+                itemId,
+                seller,
+                buyer
+            }
+        });
+    } catch (error) {
+    }
 }
 
-export async function remove(purchaseId) {
+export async function remove(purchaseId) {  // Done
     if (await prisma.purchase.findUnique({
         where: {
             purchaseId
@@ -34,5 +37,3 @@ export async function remove(purchaseId) {
             }
         });
 }
-
-export async function update(username) { }

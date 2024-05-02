@@ -37,4 +37,15 @@ export async function remove(id) {  // Done
         });
 }
 
-export async function update(username) { }
+export async function update(id, name, price, quantity) {   // Done
+    return await prisma.item.update({
+        where: {
+            id,
+        },
+        data: {
+            name,
+            price,
+            quantity,
+        }
+    });
+}

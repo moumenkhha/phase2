@@ -37,7 +37,7 @@ const seed = async () => {
                 id: faker.string.nanoid().substring(0, 5),
                 name: faker.commerce.productName(),
                 seller: seller.username,
-                price: i * 10,
+                price: Math.floor(Math.random() * (200 - 20 + 1)) + 20,
                 quantity: Math.floor(Math.random() * (100 - 10 + 1)) + 10,
             }
         });

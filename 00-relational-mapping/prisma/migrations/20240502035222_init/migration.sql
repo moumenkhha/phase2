@@ -12,7 +12,7 @@ CREATE TABLE "Item" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "seller" TEXT NOT NULL,
-    "price" INTEGER DEFAULT 10,
+    "price" INTEGER NOT NULL DEFAULT 10,
     "quantity" INTEGER NOT NULL DEFAULT 10,
     CONSTRAINT "Item_seller_fkey" FOREIGN KEY ("seller") REFERENCES "Seller" ("username") ON DELETE CASCADE ON UPDATE CASCADE
 );
