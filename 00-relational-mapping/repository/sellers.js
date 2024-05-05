@@ -5,7 +5,6 @@ export async function get(username) {   // Done
     if (!username) {
         return await prisma.seller.findMany({
             include: {
-                purchase: true,
                 item: true
             }
         });
@@ -13,19 +12,18 @@ export async function get(username) {   // Done
     return await prisma.seller.findUnique({
         where: {
             username,
+        },
+        include: {
+            item: true
         }
     });
 }
 
-export async function add(name, password) { // Done
+export async function add(props) { // Done
     return await prisma.seller.create({
-        data: {
-            name,
-            password,
-            username: Math.random().toString().substring(3, 15)
-        }
+        data: props
     });
-};
+}
 
 export async function remove(username) {    // Done
     if (await prisma.seller.findUnique({

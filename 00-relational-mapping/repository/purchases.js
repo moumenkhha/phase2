@@ -12,17 +12,10 @@ export async function get(purchaseId) { // Done
     });
 }
 
-export async function add(itemId, seller, buyer) {  // Done
-    try {
-        return await prisma.purchase.create({
-            data: {
-                itemId,
-                seller,
-                buyer
-            }
-        });
-    } catch (error) {
-    }
+export async function add(props) { // Done
+    return await prisma.purchase.create({
+        data: props
+    });
 }
 
 export async function remove(purchaseId) {  // Done
@@ -36,4 +29,13 @@ export async function remove(purchaseId) {  // Done
                 purchaseId
             }
         });
+}
+
+export async function update(purchaseId, props) {
+    return await prisma.purchase.update({
+        where: {
+            purchaseId
+        },
+        data: props
+    })
 }

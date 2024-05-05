@@ -15,16 +15,13 @@ export async function get(id) { // Done
     });
 }
 
-export async function add(name, seller) {   // Done
+export async function add(props) { 
     return await prisma.item.create({
-        data: {
-            name,
-            seller,
-        }
+        data: props
     });
 }
 
-export async function remove(id) {  // Done
+export async function remove(id) {
     if (await prisma.item.findUnique({
         where: {
             id,
@@ -37,11 +34,11 @@ export async function remove(id) {  // Done
         });
 }
 
-export async function update(id, props) {  
+export async function update(id, props) {
     return await prisma.item.update({
         where: {
-            id,
+            id
         },
         data: props
-    });
+    })
 }

@@ -1,21 +1,21 @@
-import * as buyers from "@/repository/buyers";
+import * as items from "@/repository/items";
 
-export async function GET(request) {
+export async function GET(request) {    // Done
     try {
-        const result = await buyers.get();
+        const result = await items.get();
         return Response.json(result);
     } catch (error) {
         return Response.json({ message: "Internal error" }, { status: 500 })
     }
 }
 
-export async function POST(request) {
+export async function POST(request) {   // Done
     try {
         const props = await request.json();
-        const buyer = await buyers.add(props);
-        return Response.json(buyer, { status: 201});
+        console.log(props);
+        const item = await items.add(props);  
+        return Response.json(item, { status: 201 });
     } catch (error) {
         return Response.json({ message: "Internal error" }, { status: 500 });
     }
 }
-
