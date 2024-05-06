@@ -5,9 +5,11 @@ export default async function Home() {
   const topI = await stats.topItems();
   const itemsNeverPurchased = await stats.ItemsNeverPurchased();
   const sellersNeverSell = await stats.sellersNaverSell();
+  const topSellers_13_23 = await stats.topSellers_13_23();
+  const bestBuyer_24 = await stats.bestBuyer_24();
 
   return (
-    <main className="flex flex-wrap gap-5">
+    <main className="flex flex-wrap gap-10 justify-around">
       <div>
         <table className="border">
           <caption className="text-lg font-bold">Top Countries Buying</caption>
@@ -22,6 +24,26 @@ export default async function Home() {
               <tr className="border" key={country.location}>
                 <td >{country.location}</td>
                 <td className="px-20">{country._count.location}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <table className="border">
+          <caption className="text-lg font-bold">Top Sellers Between 2013-2023</caption>
+          <thead>
+            <tr>
+              <th>Seller Name</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topSellers_13_23.map(seller => (
+              <tr className="border" key={seller.username}>
+                <td className="">{seller.seller}</td>
+                <td className="px-20">{seller._count.seller}</td>
               </tr>
             ))}
           </tbody>
@@ -50,12 +72,16 @@ export default async function Home() {
       </div>
 
       <div>
+        <h1>Best Buyer in 2024: </h1>
+        <h1 className="text-2xl bg-red-600">{bestBuyer_24.name}</h1>
+      </div>
+
+      <div>
         <table className="border">
           <caption className="text-lg font-bold">Items Never Purchased</caption>
           <thead>
             <tr>
               <th>Item Id</th>
-              <th className="">Item Name</th>
               <th className="">Item Seller</th>
               <th className="">Item Price</th>
               <th className="">Item Quantity</th>
@@ -65,9 +91,8 @@ export default async function Home() {
             {itemsNeverPurchased.map(item => (
 
               <tr className="border" key={item.id}>
-                <td>{item.id}</td>
-                <td className="px-20">{item.name}</td>
-                <td className="">{item.seller}</td>
+                <td className="">{item.id}</td>
+                <td className="px-20">{item.seller}</td>
                 <td className="px-20">{item.price}</td>
                 <td className="">{item.quantity}</td>
               </tr>
@@ -87,12 +112,14 @@ export default async function Home() {
           <tbody>
             {sellersNeverSell.map(seller => (
               <tr className="border" key={seller.username}>
-                <td className="px-20">{seller.name}</td>
+                <td className="px-10">{seller.name}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+
     </main>
   )
 }
