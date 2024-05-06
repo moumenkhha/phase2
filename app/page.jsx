@@ -12,7 +12,7 @@ export default async function Home() {
     <main className="flex flex-wrap gap-10 justify-around">
       <div>
         <table className="border">
-          <caption className="text-lg font-bold">Top Countries Buying</caption>
+          <caption className="text-lg font-bold">Top Countries in Buying</caption>
           <thead>
             <tr>
               <th>Country Name</th>
