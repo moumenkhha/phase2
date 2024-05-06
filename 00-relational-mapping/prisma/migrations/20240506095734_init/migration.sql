@@ -1,10 +1,10 @@
 -- CreateTable
 CREATE TABLE "Buyer" (
     "username" TEXT NOT NULL PRIMARY KEY,
-    "password" TEXT NOT NULL,
+    "password" TEXT NOT NULL DEFAULT 'password',
+    "name" TEXT NOT NULL DEFAULT 'AbdAllah',
     "balance" INTEGER NOT NULL DEFAULT 1000000,
-    "name" TEXT NOT NULL,
-    "location" TEXT
+    "location" TEXT NOT NULL DEFAULT 'Doha'
 );
 
 -- CreateTable
@@ -20,7 +20,7 @@ CREATE TABLE "Item" (
 -- CreateTable
 CREATE TABLE "Seller" (
     "username" TEXT NOT NULL PRIMARY KEY,
-    "password" TEXT NOT NULL,
+    "password" TEXT NOT NULL DEFAULT 'password',
     "name" TEXT NOT NULL
 );
 
