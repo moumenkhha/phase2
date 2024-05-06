@@ -10,7 +10,7 @@ const seed = async () => {
     await prisma.purchase.deleteMany();
 
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
         const sellerName = faker.person.fullName();
         const buyerName = faker.person.fullName();
 
@@ -42,7 +42,7 @@ const seed = async () => {
             }
         });
 
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 5; i++) {
             const count = await prisma.item.count();    // itemCount = buyers = seller
             const randomIndex = Math.floor(Math.random() * count); 
 

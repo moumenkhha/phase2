@@ -1,29 +1,98 @@
-import * as buyers from "@/repository/buyers";
-import * as items from "@/repository/items";
-import * as purchases from "@/repository/purchases";
-import * as sellers from "@/repository/sellers";
+import * as stats from "@/repository/stats";
 export default async function Home() {
 
-  const result = await items.get();
-  // return JSON.stringify(result);
+  const topC = await stats.topCountriesBuying();
+  const topI = await stats.topItems();
+  const itemsNeverPurchased = await stats.ItemsNeverPurchased();
+  const sellersNeverSell = await stats.sellersNaverSell();
 
-  return result.map(x =>
-    <div
-      // Buyers
-      // key={x.username} className="flex justify-between">
-      //   <p>username: {x.username}</p>
-      //   <p>password: {x.password}</p>
-      //   <p>name: {x.name}</p>
-      //   <p>balance: {x.balance}</p>
-      //   <p>location: {x.location}</p>
+  return (
+    <main className="flex flex-wrap gap-5">
+      <div>
+        <table className="border">
+          <caption className="text-lg font-bold">Top Countries Buying</caption>
+          <thead>
+            <tr>
+              <th>Country Name</th>
+              <th className="px-10">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topC.map(country => (
+              <tr className="border" key={country.location}>
+                <td >{country.location}</td>
+                <td className="px-20">{country._count.location}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      // Items
-      key={x.id} className="flex justify-between">
-      <p>id: {x.id}</p>
-      <p>name: {x.name}</p>
-      <p>seller: {x.seller}</p>
-      <p>price: {x.price}</p>
-      <p>quantity: {x.quantity}</p>
-    </div>);
+      <div>
+        <table className="border">
+          <caption className="text-lg font-bold">Top Items Bought</caption>
+          <thead>
+            <tr>
+              <th>Item Id</th>
+              <th className="px-10">Total </th>
+            </tr>
+          </thead>
+          <tbody>
+            {topI.map(item => (
 
+              <tr className="border" key={item.itemId}>
+                <td>{item.itemId}</td>
+                <td className="px-20">{item._count.itemId}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <table className="border">
+          <caption className="text-lg font-bold">Items Never Purchased</caption>
+          <thead>
+            <tr>
+              <th>Item Id</th>
+              <th className="">Item Name</th>
+              <th className="">Item Seller</th>
+              <th className="">Item Price</th>
+              <th className="">Item Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {itemsNeverPurchased.map(item => (
+
+              <tr className="border" key={item.id}>
+                <td>{item.id}</td>
+                <td className="px-20">{item.name}</td>
+                <td className="">{item.seller}</td>
+                <td className="px-20">{item.price}</td>
+                <td className="">{item.quantity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <table className="border">
+          <caption className="text-lg font-bold">Sellers Never Sell</caption>
+          <thead>
+            <tr>
+              <th>Seller Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sellersNeverSell.map(seller => (
+              <tr className="border" key={seller.username}>
+                <td className="px-20">{seller.name}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  )
 }
