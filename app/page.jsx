@@ -16,6 +16,7 @@ export default async function Home() {
           <thead>
             <tr>
               <th>Country Name</th>
+              
               <th className="px-10">Total</th>
             </tr>
           </thead>
